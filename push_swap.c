@@ -1,6 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ivbatist <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/11 10:59:53 by ivbatist          #+#    #+#             */
+/*   Updated: 2023/05/11 10:59:59 by ivbatist         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include<stdio.h>
 #include<stdlib.h>
-
+#include<unistd.h>
+#include<string.h>
+//////////////////////////////////////////////////ESTRUTURA
 typedef struct stack
 {
   int content;
@@ -10,7 +23,12 @@ typedef struct stack
   int total_mov;
   int index;
 } t_stack;
-
+//////////////////////////////////////////////////FT GERAIS
+void    ft_error(void)
+{
+    write(2, "Error!\n", 7);
+    exit(1);
+}
 void print_list(t_stack **head)
 {
     t_stack *cur = *head;
@@ -21,6 +39,51 @@ void print_list(t_stack **head)
     }
     if(cur == 0)
         printf("|---------------------------------------------------------------|\n");
+}
+int	ft_isdigit(int c)
+{		
+	if ((c >= '0') && (c <= '9'))
+	{
+		return (2048);
+	}
+	else
+	{
+		return (0);
+	}
+}
+//////////////////////////////////////////////////FT GERAIS LISTA
+t_stack	*ft_lstnew(int content)
+{
+	t_stack	*new;
+
+	new = malloc(sizeof(t_stack));
+	if (new == NULL)
+		return (NULL);
+	if (new)
+	{
+		new->content = content;
+		new->next = NULL;
+	}
+	return (new);
+}
+void	ft_lstadd_back(t_stack **lst, t_stack *new)
+{
+	t_stack	*current;
+
+	if (!*lst)
+	{
+		*lst = new;
+		return ;
+	}
+	if (lst && *lst && new)
+	{
+		current = *lst;
+		while (current->next != 0)
+		{
+			current = current->next;
+		}
+		current->next = new;
+	}
 }
 t_stack	*ft_lstlast(t_stack *lst)
 {
@@ -33,6 +96,199 @@ t_stack	*ft_lstlast(t_stack *lst)
 		return (NULL);
 	return (lst);
 }
+//////////////////////////////////////////////////FT VERIFICA MAIN
+int	ft_atoi(const char *str)
+{
+	long long int	ret;
+	int			sign;
+
+	ret = 0;
+	sign = 1;
+	while (*str == '\t' || *str == '\n' || *str == '\v' || \
+*str == '\f' || *str == '\r' || *str == ' ')
+		++str;
+	if(*str == '\0')
+		exit(1);
+	if (*str && (*str == 43 || *str == 45))
+	{
+		if (*str == 45)
+			sign = -1;
+		str++;
+	}
+	while (*str)
+	{
+		if (!ft_isdigit(*str))
+			ft_error();
+		ret *= 10;
+		ret += (sign * (*(str++) - 48));
+	}
+	if (ret > 2147483647 || ret < -2147483648)
+			ft_error();
+	return (ret);
+}
+static int	count_words(char const *str, char c)
+{
+	int	words;
+	int	flag;
+
+	words = 0;
+	flag = 0;
+	while (*str)
+	{
+		if (*str != c && flag == 0)
+		{
+			flag = 1;
+			words++;
+		}
+		else if (*str == c)
+			flag = 0;
+		str++;
+	}
+	return (words);
+}
+static int	count_letters(char const *str, char c, int i)
+{
+	int	size;
+
+	size = 0;
+	while (str[i] != c && str[i])
+	{
+		size++;
+		i++;
+	}
+	return (size);
+}
+size_t	ft_strlen(const char *str)
+{
+	size_t	cont;
+
+	cont = 0;
+	while (str[cont] != '\0')
+	{
+		cont++;
+	}
+	return (cont);
+}
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char				*string;
+	unsigned int		i;
+	unsigned int		a;
+
+	i = start;
+	a = 0;
+	if (!s)
+		return (NULL);
+	if (start > ft_strlen(s))
+	{
+		string = malloc(1 * sizeof(char));
+		if (string == NULL)
+			return (NULL);
+		string[0] = '\0';
+		return (string);
+	}
+	string = malloc((len + 1) * sizeof(char));
+	if (string == NULL)
+		return (NULL);
+	while (i < ft_strlen(s) && len-- > 0)
+		string[a++] = s[i++];
+	string[a] = '\0';
+	return (string);
+}
+char	**ft_split(char const *s, char c)
+{
+	int		i;
+	int		j;
+	int		word;
+	char	**str;
+
+	if (!s)
+		return (NULL);
+	i = 0;
+	j = -1;
+	word = count_words(s, c);
+	str = (char **)malloc((word + 1) * sizeof(char *));
+	if (!str)
+		return (NULL);
+	while (++j < word)
+	{
+		while (s[i] == c)
+			i++;
+		str[j] = ft_substr(s, i, count_letters(s, c, i));
+		if (!str)
+			return (NULL);
+		i += count_letters(s, c, i);
+	}
+	str[j] = 0;
+	return (str);
+}
+void    ft_create_node(t_stack **head, char *str)
+{
+    int numb = ft_atoi(str);
+    ft_lstadd_back(head, ft_lstnew(numb));
+}
+void	ft_freesplit(char **str)
+{
+	char	*s1;
+
+	if (!str)
+		return ;
+	while (*str)
+	{
+		s1 = *str;
+		str++;
+		free(s1);
+	}
+	*str = NULL;
+}
+t_stack *ft_check_arg_and_create_stack_a(int ac, char **av)
+{
+    t_stack *head_a;
+    head_a = NULL;
+
+    if(ac == 2)
+    {
+        char **split = ft_split(av[1], 32);
+        int i = 0;
+        while(split[i])
+        {
+            ft_create_node(&head_a, split[i]);
+            i++;
+        }
+        ft_freesplit(split);
+        free(split);
+    }
+    else
+    {
+        int i = 1;
+        while(i < ac)
+        {
+            ft_create_node(&head_a, av[i]);
+            i++;
+        }
+    }
+    return(head_a);
+}
+int		ft_check_doubles(t_stack **stack_a)
+{
+    t_stack *i = *stack_a;
+    t_stack *j = i->next;
+	
+	//printf("%d", j->content);
+    while(i && j)
+    {
+        while(j)
+        {
+            if(i->content == j->content)
+                return(1);
+            j = j->next;
+        }
+        i = i->next;
+        j = i->next;
+    }
+    return(0);
+}
+//////////////////////////////////////////////////FT MOVIMENTO
 void    swap(t_stack **stack)
 {
 	t_stack	*tmp;
@@ -43,7 +299,6 @@ void    swap(t_stack **stack)
 	tmp->next = (*stack)->next; 
 	(*stack)->next = tmp; 
 }
-//-------------->GENERAL MOVIMENTS----------------
 void	rotate(t_stack **stack)
 {
 	t_stack	*tmp;
@@ -56,7 +311,6 @@ void	rotate(t_stack **stack)
 	*stack = tmp->next;
 	tmp->next = NULL;
 }
-
 void	reverse_rotate(t_stack **stack)
 {
 	t_stack	*tmp;
@@ -79,7 +333,6 @@ void	reverse_rotate(t_stack **stack)
 	}
 	tmp->next = NULL;
 }
-
 void	push(t_stack **dest, t_stack **src)
 {
 	t_stack	*tmp;
@@ -91,31 +344,23 @@ void	push(t_stack **dest, t_stack **src)
 	*src = (*src)->next;
 	(*dest)->next = tmp;
 }
-
-//-------------->SWAP MOVIMENTS----------------
 void	sa(t_stack **a)
 {
 	swap(&(*a));
 }
-
 void	ss(t_stack **a, t_stack **b)
 {
 	swap(&(*a));
 	swap(&(*b));
 }
-
 void	sb(t_stack **b)
 {
 	swap(&(*b));
 }
-
-
-//-------------->ROTATE MOVIMENTS----------------
 void	ra(t_stack **a)
 {
 	rotate(&(*a));
 }
-
 void	rb(t_stack **b)
 {
 	rotate(&(*b));
@@ -125,12 +370,10 @@ void	rr(t_stack **a, t_stack **b)
 	rotate(&(*a));
 	rotate(&(*b));
 }
-//-------------->REVERSE ROTATE MOVIMENTS----------------
 void	rra(t_stack **a)
 {
 	reverse_rotate(&(*a));
 }
-
 void	rrb(t_stack **b)
 {
 	reverse_rotate(&(*b));
@@ -140,53 +383,15 @@ void	rrr(t_stack **a, t_stack **b)
 	reverse_rotate(&(*a));
 	reverse_rotate(&(*b));
 }
-//-------------->PUSH MOVIMENTS----------------
 void	pa(t_stack **a, t_stack **b)
 {
 	push(&(*a),&(*b));
 }
-
 void	pb(t_stack **b, t_stack **a)
 {
 	push(&(*b),&(*a));
 }
-//---------------------------------------------
-
-t_stack	*ft_lstnew(int content)
-{
-	t_stack	*new;
-
-	new = malloc(sizeof(t_stack));
-	if (new == NULL)
-		return (NULL);
-	if (new)
-	{
-		new->content = content;
-		new->next = NULL;
-	}
-	return (new);
-}
-
-void	ft_lstadd_back(t_stack **lst, t_stack *new)
-{
-	t_stack	*current;
-
-	if (!*lst)
-	{
-		*lst = new;
-		return ;
-	}
-	if (lst && *lst && new)
-	{
-		current = *lst;
-		while (current->next != 0)
-		{
-			current = current->next;
-		}
-		current->next = new;
-	}
-}
-
+//////////////////////////////////////////////////FT ALGORITMO
 t_stack	*ft_max(t_stack **stack)
 {
     t_stack *cur = *stack;
@@ -200,7 +405,6 @@ t_stack	*ft_max(t_stack **stack)
 	}
 	return(max);
 }
-
 t_stack	*ft_min(t_stack **stack)
 {
     t_stack *cur = *stack;
@@ -214,7 +418,6 @@ t_stack	*ft_min(t_stack **stack)
 	}
 	return(min);
 }
-
 t_stack *ft_check_new_min_max(t_stack *node_a, t_stack **stack_b)
 {
     t_stack *node_min;
@@ -229,7 +432,6 @@ t_stack *ft_check_new_min_max(t_stack *node_a, t_stack **stack_b)
         return(node_min);
 }
 void    ft_put_total_mov(t_stack *src, t_stack *dest);
-
 t_stack *ft_find_place(t_stack *src, t_stack **dest)
 { 
     t_stack *place = ft_check_new_min_max(src, dest);
@@ -249,9 +451,7 @@ t_stack *ft_find_place(t_stack *src, t_stack **dest)
     ft_put_total_mov(src, place);
     return(place);
 }
-//TACAR O TACACA DA DECLARACAO DA FUNCAO NO HEADER
 void ft_put_mov_and_orientation(int i, t_stack **stack);
-
 int ft_put_index_and_return_size(t_stack **stack)
 {
     t_stack *cur;
@@ -271,7 +471,6 @@ int ft_put_index_and_return_size(t_stack **stack)
     ft_put_mov_and_orientation(i, stack);
     return(i);
 }
-
 void ft_put_mov_and_orientation(int size, t_stack **stack)
 {
     t_stack *cur;
@@ -291,7 +490,6 @@ void ft_put_mov_and_orientation(int size, t_stack **stack)
         cur = cur->next;
     }
 }
-
 void    ft_put_total_mov(t_stack *src, t_stack *dest)
 {
     if(src->mov_orientation == dest->mov_orientation)
@@ -304,8 +502,7 @@ void    ft_put_total_mov(t_stack *src, t_stack *dest)
     else
         src->total_mov = src->mov + dest->mov;
 }
-
-t_stack *ft_best_case(t_stack **src)
+t_stack *ft_find_best_case(t_stack **src)
 {
     t_stack *cur = *src;
     t_stack *best_case = cur;
@@ -323,111 +520,63 @@ t_stack *ft_best_case(t_stack **src)
     }
     return(best_case);
 }
-
-int main(int ac, char** av)
+void	ft_move_best_case_to_top(t_stack *src, t_stack**stack)
+{
+	if(src->mov_orientation == 0)
+	{
+		while(src->mov > 0)
+		{
+			rotate(stack);
+			src->mov--;
+		}
+	}
+	else if(src->mov_orientation == 1)
+	{
+		while(src->mov > 0)
+		{
+			reverse_rotate(stack);
+			src->mov--;
+		}
+	}
+}
+int main(int ac, char **av)
 {
     if(ac < 2)
+        ft_error();
+    
+    else
     {
-        printf("Mensagem de Erro\n");
-        //________FUNCAO DE ERROR________//
-        return(0);
-    }
-    else if(ac == 2)
-    {
-        printf("Ft_split rodara aqui\n");
-        //________FUNCAO SPLIT________//
-        return(0);
-    }
-    else if(ac > 2)
-    {
-        //________FUNCAO CRIACAO DA STACK A________
         t_stack *head_a;
-        head_a = ft_lstnew(atoi(av[1]));
-        
-        int i;
-        i = 2;
-        int numb;
-        while(i < ac)
-        {
-            numb = atoi(av[i]);
-            ft_lstadd_back(&head_a, ft_lstnew(numb));
-            i++;
-        }
-        //________FIM STACK A__________________________
-
-        //----------------------------->FUNCAO VERIFICAR REPETIDOS
-        //----------------------------->FUNCAO VERIFICAR ORDEM
-
-        //________FUNCAO CRIACAO DA STACK B___________
         t_stack *head_b;
 
-        head_b = NULL;
-        //________FIM STACK B_________________________
+		head_a = ft_check_arg_and_create_stack_a(ac,av);
+		if(ft_check_doubles(&head_a) == 1)
+			ft_error();
+		/*if(ft_check_sorted(stack_a))
+			ft_error();*/
+		
+        pb(&head_b, &head_a);
+        pb(&head_b, &head_a);
+        pb(&head_b, &head_a);
+        rrb(&head_b);
+        pb(&head_b, &head_a);
+        rrb(&head_b);
+        pb(&head_b, &head_a);
+        pb(&head_b, &head_a);
+        pb(&head_b, &head_a);
+        rrb(&head_b);
+        pb(&head_b, &head_a);
+        rb(&head_b);
+        pb(&head_b, &head_a);
+        rb(&head_b);
+        pb(&head_b, &head_a);
+        rrb(&head_b);
+        pb(&head_b, &head_a);
 
-        //printf("Lista Original A:\n");
-        //print_list(head_a);
+		t_stack *cur = head_a;
 
-        /*int size_list_a = ft_put_index_and_return_size(&head_a);
-        printf("\nO tamanho da Lista A:%d\n", size_list_a);
-        printf("\n|----------------------------LIST A-----------------------------|\n");
-        print_list(&head_a);
-        
-        int size_list_b = ft_put_index_and_return_size(&head_b);
-        printf("\nO tamanho da Lista B:%d\n", size_list_b);
-        printf("\n|----------------------------LIST B-----------------------------|\n");
-        print_list(&head_b);*/
         int size_list_a = ft_put_index_and_return_size(&head_a);
         int size_list_b = ft_put_index_and_return_size(&head_b);
-
-        
-        pb(&head_b, &head_a);
-        pb(&head_b, &head_a);
-        pb(&head_b, &head_a);
-        rrb(&head_b);
-        pb(&head_b, &head_a);
-        rrb(&head_b);
-        pb(&head_b, &head_a);
-        pb(&head_b, &head_a);
-        pb(&head_b, &head_a);
-        rrb(&head_b);
-        pb(&head_b, &head_a);
-        rb(&head_b);
-        pb(&head_b, &head_a);
-        rb(&head_b);
-        pb(&head_b, &head_a);
-        rrb(&head_b);
-        pb(&head_b, &head_a);
-        rra(&head_a);
-        pb(&head_b, &head_a);
-        rra(&head_a);
-        rb(&head_b);
-        pb(&head_b, &head_a);
-        rb(&head_b);
-        rb(&head_b);
-        rb(&head_b);
-        pb(&head_b, &head_a);
-        rr(&head_a, &head_b);
-        ra(&head_a);
-        pb(&head_b, &head_a);
-        pb(&head_b, &head_a);
-        sa(&head_a);
-        rrb(&head_b);
-        rrb(&head_b);
-        rrb(&head_b);
-        rrb(&head_b);
-        rrb(&head_b);
-        rrb(&head_b);
-        pb(&head_b, &head_a);
-        rrb(&head_b);
-        rrb(&head_b);
-        pb(&head_b, &head_a);
-
-
-
-        t_stack *cur = head_a;
-
-        size_list_a = ft_put_index_and_return_size(&head_a);
-        size_list_b = ft_put_index_and_return_size(&head_b);
         while(cur)
         {
             t_stack *place = ft_find_place(cur, &head_b);
@@ -446,14 +595,28 @@ int main(int ac, char** av)
 
         while(cur)
         {
-            if(ft_best_case(&head_a) == cur)
-                printf("O melhor node para movimentar em A: %d\n", cur->content);
+            if(ft_find_best_case(&head_a) == cur)
+            {
+				printf("O melhor node para movimentar em A: %d\n", cur->content);
+				ft_move_best_case_to_top(cur, &head_a);
+			}
             cur = cur->next;
         }
 
-        //printf("Lugar de A em B esta acima do: %d\n", place->content);
+		size_list_a = ft_put_index_and_return_size(&head_a);
+        size_list_b = ft_put_index_and_return_size(&head_b);
 
-        //TESTE COM AS ENTRADAS: 5 2 7 1 6 3 9 4 8
-        //TESTE COM AS ENTRADAS: 2 7 15 3 8 9 10 100 37 28 42 32 6 1 29 30 55 80
+        printf("\nO tamanho da Lista A:%d\n", size_list_a);
+        printf("\n|----------------------------LIST A-----------------------------|\n");
+        print_list(&head_a);
+        
+        size_list_b = ft_put_index_and_return_size(&head_b);
+        printf("\nO tamanho da Lista B:%d\n", size_list_b);
+        printf("\n|----------------------------LIST B-----------------------------|\n");
+        print_list(&head_b);
     }
 }
+
+//teste com : 2 7 15 3 8 9 10 100 37 28 42 32 6 1 29 30 55 80
+
+//proximo passo: mudar o atoi para nao considerar ft_error
