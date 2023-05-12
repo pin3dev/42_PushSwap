@@ -274,7 +274,6 @@ int		ft_check_doubles(t_stack **stack_a)
     t_stack *i = *stack_a;
     t_stack *j = i->next;
 	
-	//printf("%d", j->content);
     while(i && j)
     {
         while(j)
@@ -287,6 +286,24 @@ int		ft_check_doubles(t_stack **stack_a)
         j = i->next;
     }
     return(0);
+}
+int ft_check_sorted(t_stack **stack)
+{
+    t_stack *cmp = *stack;
+    t_stack *i = cmp->next;
+	
+    while(cmp && i)
+    {
+		while(i)
+       	{
+           	if(cmp->content > i->content)
+               	return(0);
+           	i = i->next;
+       	}
+        cmp = cmp->next;
+        i = cmp->next;
+    }
+    return(1);
 }
 //////////////////////////////////////////////////FT MOVIMENTO
 void    swap(t_stack **stack)
@@ -432,7 +449,7 @@ t_stack *ft_check_new_min_max(t_stack *node_a, t_stack **stack_b)
         return(node_min);
 }
 void    ft_put_total_mov(t_stack *src, t_stack *dest);
-t_stack *ft_find_place(t_stack *src, t_stack **dest)
+/*t_stack *ft_return_dest_place(t_stack *src, t_stack **dest)
 { 
     t_stack *place = ft_check_new_min_max(src, dest);
     t_stack *cur = *dest;
@@ -448,11 +465,34 @@ t_stack *ft_find_place(t_stack *src, t_stack **dest)
             cur = cur->next;
         }
     }
-    ft_put_total_mov(src, place);
     return(place);
+}*/
+void	ft_find_place_n_def_total_mov(t_stack **src, t_stack **dest)
+{ 
+    t_stack	*cur_src = *src;
+	t_stack *place = ft_check_new_min_max(cur_src, dest);
+    t_stack *cur_dest = *dest;
+
+	while(cur_src)
+	{
+		while(cur_dest)
+		{
+			if(cur_dest->content > cur_src->content)
+				cur_dest = cur_dest->next;
+			else
+			{
+				if(cur_dest->content > place->content)
+					place = cur_dest;
+				cur_dest = cur_dest->next;
+			}
+		}
+		ft_put_total_mov(cur_src, place);
+		cur_dest = *dest;
+		cur_src = cur_src->next;
+	}
 }
 void ft_put_mov_and_orientation(int i, t_stack **stack);
-int ft_put_index_and_return_size(t_stack **stack)
+void ft_put_index_n_def_mov_n_orient(t_stack **stack)
 {
     t_stack *cur;
     cur = *stack;
@@ -467,9 +507,8 @@ int ft_put_index_and_return_size(t_stack **stack)
         i++;
     }
     cur = *stack;
-    
+
     ft_put_mov_and_orientation(i, stack);
-    return(i);
 }
 void ft_put_mov_and_orientation(int size, t_stack **stack)
 {
@@ -552,8 +591,8 @@ int main(int ac, char **av)
 		head_a = ft_check_arg_and_create_stack_a(ac,av);
 		if(ft_check_doubles(&head_a) == 1)
 			ft_error();
-		/*if(ft_check_sorted(stack_a))
-			ft_error();*/
+		/*if(!ft_check_sorted(&head_a))
+			ft_case_sort();*/
 		
         pb(&head_b, &head_a);
         pb(&head_b, &head_a);
@@ -575,19 +614,14 @@ int main(int ac, char **av)
 
 		t_stack *cur = head_a;
 
-        int size_list_a = ft_put_index_and_return_size(&head_a);
-        int size_list_b = ft_put_index_and_return_size(&head_b);
-        while(cur)
-        {
-            t_stack *place = ft_find_place(cur, &head_b);
-            cur = cur->next;
-        }
-        printf("\nO tamanho da Lista A:%d\n", size_list_a);
+        ft_put_index_n_def_mov_n_orient(&head_a);
+		ft_put_index_n_def_mov_n_orient(&head_b);
+		ft_find_place_n_def_total_mov(&head_a, &head_b);
+
         printf("\n|----------------------------LIST A-----------------------------|\n");
         print_list(&head_a);
         
-        size_list_b = ft_put_index_and_return_size(&head_b);
-        printf("\nO tamanho da Lista B:%d\n", size_list_b);
+        ft_put_index_n_def_mov_n_orient(&head_b);
         printf("\n|----------------------------LIST B-----------------------------|\n");
         print_list(&head_b);
         
@@ -603,15 +637,13 @@ int main(int ac, char **av)
             cur = cur->next;
         }
 
-		size_list_a = ft_put_index_and_return_size(&head_a);
-        size_list_b = ft_put_index_and_return_size(&head_b);
+		ft_put_index_n_def_mov_n_orient(&head_a);
+        ft_put_index_n_def_mov_n_orient(&head_b);
 
-        printf("\nO tamanho da Lista A:%d\n", size_list_a);
         printf("\n|----------------------------LIST A-----------------------------|\n");
         print_list(&head_a);
         
-        size_list_b = ft_put_index_and_return_size(&head_b);
-        printf("\nO tamanho da Lista B:%d\n", size_list_b);
+        ft_put_index_n_def_mov_n_orient(&head_b);
         printf("\n|----------------------------LIST B-----------------------------|\n");
         print_list(&head_b);
     }
@@ -619,4 +651,4 @@ int main(int ac, char **av)
 
 //teste com : 2 7 15 3 8 9 10 100 37 28 42 32 6 1 29 30 55 80
 
-//proximo passo: mudar o atoi para nao considerar ft_error
+//proximo passo: corrigir o SPLIT, que esta com problemas quando passado apenas um arguento com espacos
