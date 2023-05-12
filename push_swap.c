@@ -449,7 +449,7 @@ t_stack *ft_check_new_min_max(t_stack *node_a, t_stack **stack_b)
         return(node_min);
 }
 void    ft_put_total_mov(t_stack *src, t_stack *dest);
-/*t_stack *ft_return_dest_place(t_stack *src, t_stack **dest)
+t_stack *ft_return_dest_place(t_stack *src, t_stack **dest)
 { 
     t_stack *place = ft_check_new_min_max(src, dest);
     t_stack *cur = *dest;
@@ -466,7 +466,7 @@ void    ft_put_total_mov(t_stack *src, t_stack *dest);
         }
     }
     return(place);
-}*/
+}
 void	ft_find_place_n_def_total_mov(t_stack **src, t_stack **dest)
 { 
     t_stack	*cur_src = *src;
@@ -492,23 +492,33 @@ void	ft_find_place_n_def_total_mov(t_stack **src, t_stack **dest)
 	}
 }
 void ft_put_mov_and_orientation(int i, t_stack **stack);
-void ft_put_index_n_def_mov_n_orient(t_stack **stack)
+int ft_put_index_n_def_mov_n_orient(t_stack **src, t_stack **dest)
 {
     t_stack *cur;
-    cur = *stack;
-    
     int i;
-    i = 0;
+	int j;
 
+    cur = *src;
+    i = 0;
+	j = 0;
     while(cur)
     {
         cur->index = i;
         cur = cur->next;
         i++;
     }
-    cur = *stack;
+    ft_put_mov_and_orientation(i, src);
+	
+	cur = *dest;
+    while(cur)
+    {
+        cur->index = j;
+        cur = cur->next;
+        j++;
+    }
 
-    ft_put_mov_and_orientation(i, stack);
+	ft_put_mov_and_orientation(j, dest);
+	return(i);
 }
 void ft_put_mov_and_orientation(int size, t_stack **stack)
 {
@@ -528,6 +538,7 @@ void ft_put_mov_and_orientation(int size, t_stack **stack)
         }
         cur = cur->next;
     }
+	
 }
 void    ft_put_total_mov(t_stack *src, t_stack *dest)
 {
@@ -578,6 +589,29 @@ void	ft_move_best_case_to_top(t_stack *src, t_stack**stack)
 		}
 	}
 }
+void	ft_big_sort(t_stack **stack_a)
+{
+	t_stack *stack_b;
+	t_stack *node_to_mov;
+	node_to_mov = *stack_a;
+
+	pb(&stack_b, stack_a);
+    pb(&stack_b, stack_a);
+
+	while(ft_put_index_n_def_mov_n_orient(stack_a, &stack_b) > 3)
+	{
+		ft_find_place_n_def_total_mov(stack_a, &stack_b);
+		node_to_mov = ft_find_best_case(stack_a);
+		ft_move_best_case_to_top(node_to_mov, stack_a);
+		node_to_mov = ft_return_dest_place(*stack_a, &stack_b);
+		ft_move_best_case_to_top(node_to_mov, &stack_b);
+		pb(&stack_b, stack_a);
+	}
+	printf("\n|----------------------------LIST A-----------------------------|\n");
+    print_list(stack_a);
+	printf("\n|----------------------------LIST B-----------------------------|\n");
+    print_list(&stack_b);
+}
 int main(int ac, char **av)
 {
     if(ac < 2)
@@ -586,67 +620,18 @@ int main(int ac, char **av)
     else
     {
         t_stack *head_a;
-        t_stack *head_b;
 
 		head_a = ft_check_arg_and_create_stack_a(ac,av);
 		if(ft_check_doubles(&head_a) == 1)
 			ft_error();
-		/*if(!ft_check_sorted(&head_a))
-			ft_case_sort();*/
-		
-        pb(&head_b, &head_a);
-        pb(&head_b, &head_a);
-        pb(&head_b, &head_a);
-        rrb(&head_b);
-        pb(&head_b, &head_a);
-        rrb(&head_b);
-        pb(&head_b, &head_a);
-        pb(&head_b, &head_a);
-        pb(&head_b, &head_a);
-        rrb(&head_b);
-        pb(&head_b, &head_a);
-        rb(&head_b);
-        pb(&head_b, &head_a);
-        rb(&head_b);
-        pb(&head_b, &head_a);
-        rrb(&head_b);
-        pb(&head_b, &head_a);
+		if(!ft_check_sorted(&head_a))
+		{
+			printf("\n|----------------------------LIST A-----------------------------|\n");
+        	print_list(&head_a);
+			ft_big_sort(&head_a);
+		}
+	}
 
-		t_stack *cur = head_a;
-
-        ft_put_index_n_def_mov_n_orient(&head_a);
-		ft_put_index_n_def_mov_n_orient(&head_b);
-		ft_find_place_n_def_total_mov(&head_a, &head_b);
-
-        printf("\n|----------------------------LIST A-----------------------------|\n");
-        print_list(&head_a);
-        
-        ft_put_index_n_def_mov_n_orient(&head_b);
-        printf("\n|----------------------------LIST B-----------------------------|\n");
-        print_list(&head_b);
-        
-        cur = head_a;
-
-        while(cur)
-        {
-            if(ft_find_best_case(&head_a) == cur)
-            {
-				printf("O melhor node para movimentar em A: %d\n", cur->content);
-				ft_move_best_case_to_top(cur, &head_a);
-			}
-            cur = cur->next;
-        }
-
-		ft_put_index_n_def_mov_n_orient(&head_a);
-        ft_put_index_n_def_mov_n_orient(&head_b);
-
-        printf("\n|----------------------------LIST A-----------------------------|\n");
-        print_list(&head_a);
-        
-        ft_put_index_n_def_mov_n_orient(&head_b);
-        printf("\n|----------------------------LIST B-----------------------------|\n");
-        print_list(&head_b);
-    }
 }
 
 //teste com : 2 7 15 3 8 9 10 100 37 28 42 32 6 1 29 30 55 80
