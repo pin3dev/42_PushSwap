@@ -96,6 +96,20 @@ t_stack	*ft_lstlast(t_stack *lst)
 		return (NULL);
 	return (lst);
 }
+int	ft_lstsize(t_stack *lst)
+{
+	int	count;
+	t_stack *cur;
+
+	count = 0;
+	cur = lst;
+	while (cur != NULL)
+	{
+		cur = cur->next;
+		count++;
+	}
+	return (count);
+}
 //////////////////////////////////////////////////FT VERIFICA MAIN
 int	ft_atoi(const char *str)
 {
@@ -589,23 +603,119 @@ void	ft_move_best_case_to_top(t_stack *src, t_stack**stack)
 		}
 	}
 }
-void	ft_big_sort(t_stack **stack_a)
+void	ft_move_best_case_to_base(t_stack *src, t_stack**stack)
 {
-	t_stack *stack_b;
+	ft_move_best_case_to_top(src, stack);
+	rotate(stack);
+}
+t_stack *ft_fit_between(t_stack *src, t_stack **dest)
+{
+	t_stack *place = ft_min(dest);
+    t_stack *cur = *dest;
+
+    while(cur)
+    {
+        if(cur->content > src->content)
+            cur = cur->next;
+        else
+        {
+            if(cur->content > place->content)
+                place = cur;
+            cur = cur->next;
+        }
+    }
+    return(place);
+}
+void	ft_rotate_to_finish(t_stack **stack_a, t_stack **stack_b)
+{
+	t_stack *node_to_mov;
+	node_to_mov = ft_min(stack_a);
+	
+	ft_put_index_n_def_mov_n_orient(stack_a, stack_b);
+	if(node_to_mov->index != 0)
+		ft_move_best_case_to_top(node_to_mov, stack_a);
+}
+void	ft_back_to_a(t_stack **stack_a, t_stack **stack_b)
+{
+	t_stack *node_to_mov;
+	node_to_mov = *stack_b;
+
+	while(ft_put_index_n_def_mov_n_orient(stack_b, stack_a) > 0)
+	{
+		node_to_mov = ft_fit_between(*stack_b, stack_a);
+		ft_move_best_case_to_base(node_to_mov, stack_a);
+		pa(stack_a, stack_b);
+	}
+	ft_rotate_to_finish(stack_a, stack_b);
+}
+void	ft_sort_3(t_stack **stack_a)
+{
+	//x,y,z sao as posicoes, tipo index
+	t_stack *x;
+	t_stack *y;
+	t_stack	*z;
+
+	x = *stack_a;
+	y = (*stack_a)->next;
+	z = y->next;
+
+	//Caso I: 2 1 3
+	if(x->content > y->content && y->content < z->content && z->content > x->content)
+		sa(stack_a);
+	//Caso II: 3 2 1
+	if(x->content > y->content && y->content > z->content && z->content < x->content)
+	{
+		sa(stack_a);
+		rra(stack_a);
+	}
+	//Caso III: 3 1 2
+	if(x->content > y->content && y->content < z->content && z->content < x->content)
+		ra(stack_a);
+	//Caso IV: 1 3 2
+	if(x->content < y->content && y->content > z->content && z->content > x->content)
+	{
+		sa(stack_a);
+		ra(stack_a);
+	}
+	//Caso V: 2 3 1
+	if(x->content < y->content && y->content > z->content && z->content < x->content)
+		rra(stack_a);
+}
+void	ft_big_sort(t_stack **stack_a, t_stack **stack_b)
+{
 	t_stack *node_to_mov;
 	node_to_mov = *stack_a;
 
-	pb(&stack_b, stack_a);
-    pb(&stack_b, stack_a);
-
-	while(ft_put_index_n_def_mov_n_orient(stack_a, &stack_b) > 3)
+	pb(stack_b, stack_a);
+	pb(stack_b, stack_a);
+	while(ft_put_index_n_def_mov_n_orient(stack_a, stack_b) > 3)
 	{
-		ft_find_place_n_def_total_mov(stack_a, &stack_b);
+		ft_find_place_n_def_total_mov(stack_a, stack_b);
 		node_to_mov = ft_find_best_case(stack_a);
 		ft_move_best_case_to_top(node_to_mov, stack_a);
-		node_to_mov = ft_return_dest_place(*stack_a, &stack_b);
-		ft_move_best_case_to_top(node_to_mov, &stack_b);
-		pb(&stack_b, stack_a);
+		node_to_mov = ft_return_dest_place(*stack_a, stack_b);
+		ft_move_best_case_to_top(node_to_mov, stack_b);
+		pb(stack_b, stack_a);
+	}
+}
+void	ft_sort_cases(t_stack **stack_a)
+{
+	t_stack *stack_b;
+
+	stack_b = NULL;
+	if(ft_lstsize(*stack_a) == 2)
+		sa(stack_a);
+	else 
+	{
+		if(ft_lstsize(*stack_a) == 4)
+			pb(&stack_b, stack_a);
+		if(ft_lstsize(*stack_a) >= 5)
+		{
+			ft_big_sort(stack_a, &stack_b);
+		}
+		ft_sort_3(stack_a);
+		if(stack_b)
+			ft_back_to_a(stack_a, &stack_b);
 	}
 	printf("\n|----------------------------LIST A-----------------------------|\n");
     print_list(stack_a);
@@ -628,7 +738,7 @@ int main(int ac, char **av)
 		{
 			printf("\n|----------------------------LIST A-----------------------------|\n");
         	print_list(&head_a);
-			ft_big_sort(&head_a);
+			ft_sort_cases(&head_a);
 		}
 	}
 
@@ -636,4 +746,12 @@ int main(int ac, char **av)
 
 //teste com : 2 7 15 3 8 9 10 100 37 28 42 32 6 1 29 30 55 80
 
-//proximo passo: corrigir o SPLIT, que esta com problemas quando passado apenas um arguento com espacos
+//Para dia 17/05/23:
+// -> Organizar saidas de texto padrao a partir dos movimentos
+// -> Criar funcao free para listas
+// -> Criar Checker
+// -> AJustar o Split (com problemas quando passado apenas um argumento com espacos)
+// -> Separar em arquivos 
+// -> Construir Header
+// -> Construir Makefile
+// -> Passar Norminette
