@@ -303,7 +303,8 @@ int		ft_check_doubles(t_stack **stack_a)
 }
 int ft_check_sorted(t_stack **stack)
 {
-    t_stack *cmp = *stack;
+    
+	t_stack *cmp = *stack;
     t_stack *i = cmp->next;
 	
     while(cmp && i)
@@ -497,11 +498,12 @@ t_stack *ft_return_dest_place(t_stack *src, t_stack **dest)
 void	ft_find_place_n_def_total_mov(t_stack **src, t_stack **dest)
 { 
     t_stack	*cur_src = *src;
-	t_stack *place = ft_check_new_min_max(cur_src, dest);
+	t_stack *place;// = ft_check_new_min_max(cur_src, dest);
     t_stack *cur_dest = *dest;
 
 	while(cur_src)
 	{
+		place = ft_check_new_min_max(cur_src, dest);
 		while(cur_dest)
 		{
 			if(cur_dest->content > cur_src->content)
@@ -565,7 +567,6 @@ void ft_put_mov_and_orientation(int size, t_stack **stack)
         }
         cur = cur->next;
     }
-	
 }
 void    ft_put_total_mov(t_stack *src, t_stack *dest)
 {
@@ -590,8 +591,8 @@ t_stack *ft_find_best_case(t_stack **src)
     {
         if(cur->total_mov < less_mov)
         {
+			best_case = cur;
             less_mov = cur->total_mov;
-            best_case = cur;
         }
         cur = cur->next;
     }
@@ -689,7 +690,7 @@ void	ft_rotate_to_finish(t_stack **stack_a, t_stack **stack_b)
 	node_to_mov = ft_min(stack_a);
 	
 	ft_put_index_n_def_mov_n_orient(stack_a, stack_b);
-	if(node_to_mov->index != 0)
+	if(node_to_mov->index > 0)
 		ft_move_node_to_top_a(node_to_mov, stack_a);
 }
 void	ft_back_to_a(t_stack **stack_a, t_stack **stack_b)
@@ -748,9 +749,10 @@ void	ft_big_sort(t_stack **stack_a, t_stack **stack_b)
 
 	pb(stack_b, stack_a);
 	pb(stack_b, stack_a);
-	while(ft_put_index_n_def_mov_n_orient(stack_a, stack_b) > 3)
+	int size = ft_put_index_n_def_mov_n_orient(stack_a, stack_b);
+	ft_find_place_n_def_total_mov(stack_a, stack_b);
+	while(size > 3 && ft_check_sorted(stack_a) == 0)
 	{
-		ft_find_place_n_def_total_mov(stack_a, stack_b);
 		node_src = ft_find_best_case(stack_a);
 		node_dest = ft_return_dest_place(node_src, stack_b);
 		if(node_src->mov_orientation == node_dest->mov_orientation)
@@ -760,6 +762,9 @@ void	ft_big_sort(t_stack **stack_a, t_stack **stack_b)
 		if(node_dest->mov > 0)
 			ft_move_node_to_top_b(node_dest, stack_b);
 		pb(stack_b, stack_a);
+		size = ft_put_index_n_def_mov_n_orient(stack_a, stack_b);
+		ft_find_place_n_def_total_mov(stack_a, stack_b);
+
 	}
 }
 void	ft_sort_cases(t_stack **stack_a)
@@ -781,10 +786,6 @@ void	ft_sort_cases(t_stack **stack_a)
 		if(stack_b)
 			ft_back_to_a(stack_a, &stack_b);
 	}
-	/*printf("\n|----------------------------LIST A-----------------------------|\n");
-    print_list(stack_a);
-	printf("\n|----------------------------LIST B-----------------------------|\n");
-    print_list(&stack_b);*/
 }
 int main(int ac, char **av)
 {
@@ -800,8 +801,6 @@ int main(int ac, char **av)
 			ft_error();
 		if(!ft_check_sorted(&head_a))
 		{
-			/*printf("\n|----------------------------LIST A-----------------------------|\n");
-        	print_list(&head_a);*/
 			ft_sort_cases(&head_a);
 		}
 	}
@@ -811,7 +810,6 @@ int main(int ac, char **av)
 //teste com : 2 7 15 3 8 9 10 100 37 28 42 32 6 1 29 30 55 80
 
 //Para dia 17/05/23:
-// -> Organizar saidas de texto padrao a partir dos movimentos
 // -> Criar funcao free para listas
 // -> Criar Checker
 // -> Ajustar o Split (com problemas quando passado apenas um argumento com espacos)
