@@ -378,49 +378,62 @@ void	push(t_stack **dest, t_stack **src)
 void	sa(t_stack **a)
 {
 	swap(&(*a));
+	write(1, "sa\n", 3);
 }
 void	ss(t_stack **a, t_stack **b)
 {
 	swap(&(*a));
 	swap(&(*b));
+	write(1, "ss\n", 3);
 }
 void	sb(t_stack **b)
 {
 	swap(&(*b));
+	write(1, "sb\n", 3);
+
 }
 void	ra(t_stack **a)
 {
 	rotate(&(*a));
+	write(1, "ra\n", 3);
+
 }
 void	rb(t_stack **b)
 {
 	rotate(&(*b));
+	write(1, "rb\n", 3);
 }
 void	rr(t_stack **a, t_stack **b)
 {
 	rotate(&(*a));
 	rotate(&(*b));
+	write(1, "rr\n", 3);
 }
 void	rra(t_stack **a)
 {
 	reverse_rotate(&(*a));
+	write(1, "rra\n", 4);
 }
 void	rrb(t_stack **b)
 {
 	reverse_rotate(&(*b));
+	write(1, "rrb\n", 4);
 }
 void	rrr(t_stack **a, t_stack **b)
 {
 	reverse_rotate(&(*a));
 	reverse_rotate(&(*b));
+	write(1, "rrr\n", 4);
 }
 void	pa(t_stack **a, t_stack **b)
 {
 	push(&(*a),&(*b));
+	write(1, "pa\n", 3);
 }
 void	pb(t_stack **b, t_stack **a)
 {
 	push(&(*b),&(*a));
+	write(1, "pb\n", 3);
 }
 //////////////////////////////////////////////////FT ALGORITMO
 t_stack	*ft_max(t_stack **stack)
@@ -584,42 +597,86 @@ t_stack *ft_find_best_case(t_stack **src)
     }
     return(best_case);
 }
-void	ft_move_best_case_to_top(t_stack *src, t_stack**stack)
+void	ft_move_node_to_top_a(t_stack *node_a, t_stack**stack_a)
 {
-	if(src->mov_orientation == 0)
+	if(node_a->mov_orientation == 0)
 	{
-		while(src->mov > 0)
+		while(node_a->mov > 0)
 		{
-			rotate(stack);
-			src->mov--;
+			ra(stack_a);
+			node_a->mov--;
 		}
 	}
-	else if(src->mov_orientation == 1)
+	else if(node_a->mov_orientation == 1)
 	{
-		while(src->mov > 0)
+		while(node_a->mov > 0)
 		{
-			reverse_rotate(stack);
-			src->mov--;
+			rra(stack_a);
+			node_a->mov--;
 		}
 	}
 }
-void	ft_move_best_case_to_base(t_stack *src, t_stack**stack)
+void	ft_move_node_to_top_b(t_stack *node_b, t_stack**stack_b)
 {
-	ft_move_best_case_to_top(src, stack);
-	rotate(stack);
+	if(node_b->mov_orientation == 0)
+	{
+		while(node_b->mov > 0)
+		{
+			rb(stack_b);
+			node_b->mov--;
+		}
+	}
+	else if(node_b->mov_orientation == 1)
+	{
+		while(node_b->mov > 0)
+		{
+			rrb(stack_b);
+			node_b->mov--;
+		}
+	}
+}
+void	ft_move_node_to_top_ab(t_stack *node_a, t_stack *node_b, t_stack**stack_a, t_stack**stack_b)
+{
+	int mov_tog = node_a->mov;
+	if(node_b->mov < mov_tog)
+		mov_tog = node_b->mov;
+
+	if(node_a->mov_orientation == 0 && node_b->mov_orientation == 0)
+	{
+		while(mov_tog > 0)
+		{
+			rr(stack_a, stack_b);
+			mov_tog--;
+			node_a->mov--;
+			node_b->mov--;
+		}
+	}
+	else if(node_a->mov_orientation == 1 && node_b->mov_orientation == 1)
+	{
+		while(mov_tog > 0)
+		{
+			rrr(stack_a, stack_b);
+			mov_tog--;
+			node_a->mov--;
+			node_b->mov--;
+		}
+	}
 }
 t_stack *ft_fit_between(t_stack *src, t_stack **dest)
 {
-	t_stack *place = ft_min(dest);
+	t_stack *place = ft_max(dest);
     t_stack *cur = *dest;
+
+	if(src->content > place->content)
+		place = ft_min(dest);
 
     while(cur)
     {
-        if(cur->content > src->content)
+        if(cur->content < src->content)
             cur = cur->next;
         else
         {
-            if(cur->content > place->content)
+            if(cur->content < place->content)
                 place = cur;
             cur = cur->next;
         }
@@ -633,7 +690,7 @@ void	ft_rotate_to_finish(t_stack **stack_a, t_stack **stack_b)
 	
 	ft_put_index_n_def_mov_n_orient(stack_a, stack_b);
 	if(node_to_mov->index != 0)
-		ft_move_best_case_to_top(node_to_mov, stack_a);
+		ft_move_node_to_top_a(node_to_mov, stack_a);
 }
 void	ft_back_to_a(t_stack **stack_a, t_stack **stack_b)
 {
@@ -643,7 +700,7 @@ void	ft_back_to_a(t_stack **stack_a, t_stack **stack_b)
 	while(ft_put_index_n_def_mov_n_orient(stack_b, stack_a) > 0)
 	{
 		node_to_mov = ft_fit_between(*stack_b, stack_a);
-		ft_move_best_case_to_base(node_to_mov, stack_a);
+		ft_move_node_to_top_a(node_to_mov, stack_a);
 		pa(stack_a, stack_b);
 	}
 	ft_rotate_to_finish(stack_a, stack_b);
@@ -683,18 +740,25 @@ void	ft_sort_3(t_stack **stack_a)
 }
 void	ft_big_sort(t_stack **stack_a, t_stack **stack_b)
 {
-	t_stack *node_to_mov;
-	node_to_mov = *stack_a;
+	t_stack *node_src;
+	t_stack *node_dest;
+
+	node_src = *stack_a;
+	node_dest = *stack_b;
 
 	pb(stack_b, stack_a);
 	pb(stack_b, stack_a);
 	while(ft_put_index_n_def_mov_n_orient(stack_a, stack_b) > 3)
 	{
 		ft_find_place_n_def_total_mov(stack_a, stack_b);
-		node_to_mov = ft_find_best_case(stack_a);
-		ft_move_best_case_to_top(node_to_mov, stack_a);
-		node_to_mov = ft_return_dest_place(*stack_a, stack_b);
-		ft_move_best_case_to_top(node_to_mov, stack_b);
+		node_src = ft_find_best_case(stack_a);
+		node_dest = ft_return_dest_place(node_src, stack_b);
+		if(node_src->mov_orientation == node_dest->mov_orientation)
+			ft_move_node_to_top_ab(node_src,node_dest,stack_a, stack_b);
+		if(node_src->mov > 0)
+			ft_move_node_to_top_a(node_src, stack_a);
+		if(node_dest->mov > 0)
+			ft_move_node_to_top_b(node_dest, stack_b);
 		pb(stack_b, stack_a);
 	}
 }
@@ -717,10 +781,10 @@ void	ft_sort_cases(t_stack **stack_a)
 		if(stack_b)
 			ft_back_to_a(stack_a, &stack_b);
 	}
-	printf("\n|----------------------------LIST A-----------------------------|\n");
+	/*printf("\n|----------------------------LIST A-----------------------------|\n");
     print_list(stack_a);
 	printf("\n|----------------------------LIST B-----------------------------|\n");
-    print_list(&stack_b);
+    print_list(&stack_b);*/
 }
 int main(int ac, char **av)
 {
@@ -736,8 +800,8 @@ int main(int ac, char **av)
 			ft_error();
 		if(!ft_check_sorted(&head_a))
 		{
-			printf("\n|----------------------------LIST A-----------------------------|\n");
-        	print_list(&head_a);
+			/*printf("\n|----------------------------LIST A-----------------------------|\n");
+        	print_list(&head_a);*/
 			ft_sort_cases(&head_a);
 		}
 	}
@@ -750,7 +814,7 @@ int main(int ac, char **av)
 // -> Organizar saidas de texto padrao a partir dos movimentos
 // -> Criar funcao free para listas
 // -> Criar Checker
-// -> AJustar o Split (com problemas quando passado apenas um argumento com espacos)
+// -> Ajustar o Split (com problemas quando passado apenas um argumento com espacos)
 // -> Separar em arquivos 
 // -> Construir Header
 // -> Construir Makefile
