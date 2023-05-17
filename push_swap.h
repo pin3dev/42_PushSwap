@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clima-fr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ivbatist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/17 15:43:55 by clima-fr          #+#    #+#             */
-/*   Updated: 2023/05/17 21:03:37 by clima-fr         ###   ########.fr       */
+/*   Created: 2023/05/17 22:47:30 by ivbatist          #+#    #+#             */
+/*   Updated: 2023/05/17 22:47:39 by ivbatist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PUSH_SWAP_H
@@ -25,8 +25,6 @@ typedef struct stack
 	int				index;
 }			t_stack;
 //////////////////////////////////////////////////FT GERAIS
-static int	count_words(char const *str, char c);
-static int	count_letters(char const *str, char c, int i);
 void		ft_error(void);
 int			ft_isdigit(int c);
 //////////////////////////////////////////////////FT GERAIS LISTA
