@@ -241,6 +241,20 @@ void    ft_create_node(t_stack **head, char *str)
     int numb = ft_atoi(str);
     ft_lstadd_back(head, ft_lstnew(numb));
 }
+void	ft_freelst(t_stack **stack)
+{
+	t_stack	*cur;
+
+	if (!stack)
+		return ;
+	while (*stack)
+	{
+		cur = (*stack)->next;
+		(*stack)->content = 0;
+		free(*stack);
+		*stack = cur;
+	}
+}
 void	ft_freesplit(char **str)
 {
 	char	*s1;
@@ -263,6 +277,8 @@ t_stack *ft_check_arg_and_create_stack_a(int ac, char **av)
     if(ac == 2)
     {
         char **split = ft_split(av[1], 32);
+		if(*split == NULL || split == NULL)
+			ft_error();
         int i = 0;
         while(split[i])
         {
@@ -797,12 +813,16 @@ int main(int ac, char **av)
         t_stack *head_a;
 
 		head_a = ft_check_arg_and_create_stack_a(ac,av);
-		if(ft_check_doubles(&head_a) == 1)
+		if(!head_a || ft_check_doubles(&head_a) == 1)
+		{
+			ft_freelst(&head_a);
 			ft_error();
+		}
 		if(!ft_check_sorted(&head_a))
 		{
 			ft_sort_cases(&head_a);
 		}
+		ft_freelst(&head_a);
 	}
 
 }
@@ -810,9 +830,7 @@ int main(int ac, char **av)
 //teste com : 2 7 15 3 8 9 10 100 37 28 42 32 6 1 29 30 55 80
 
 //Para dia 17/05/23:
-// -> Criar funcao free para listas
 // -> Criar Checker
-// -> Ajustar o Split (com problemas quando passado apenas um argumento com espacos)
 // -> Separar em arquivos 
 // -> Construir Header
 // -> Construir Makefile
