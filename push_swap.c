@@ -278,7 +278,11 @@ t_stack *ft_check_arg_and_create_stack_a(int ac, char **av)
     {
         char **split = ft_split(av[1], 32);
 		if(*split == NULL || split == NULL)
+		{	
+			ft_freesplit(split);
+        	free(split);
 			ft_error();
+		}
         int i = 0;
         while(split[i])
         {
