@@ -16,7 +16,7 @@ int	main(int ac, char **av)
 	t_stack	*head_a;
 
 	if (ac < 2)
-		ft_error();
+		return (0);
 	else
 	{
 		head_a = ft_check_arg_and_create_stack_a(ac, av);

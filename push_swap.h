@@ -42,7 +42,7 @@ void		ft_create_node(t_stack **head, char *str);
 void		ft_freelst(t_stack **stack);
 void		ft_freesplit(char **str);
 t_stack		*ft_check_arg_and_create_stack_a(int ac, char **av);
-t_stack		*ft_arg_to_split(char **split);
+t_stack		*ft_args_splited(char **split);
 int			ft_check_doubles(t_stack **stack_a);
 int			ft_check_sorted(t_stack **stack);
 //////////////////////////////////////////////////FT MOVIMENTO

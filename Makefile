@@ -6,11 +6,11 @@
 #    By: ivbatist <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/17 22:31:43 by ivbatist          #+#    #+#              #
-#    Updated: 2023/05/17 22:55:23 by ivbatist         ###   ########.fr        #
+#    Updated: 2023/05/17 23:42:29 by ivbatist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME 	= push_swap.a
+NAME 	= push_swap
 HDRS 	= push_swap.h
 SRC 	= push_swap.c check_algorithm.c check_numbers.c ft_atoi_ps.c \
 	  ft_split_functions.c general_operations.c operations_a.c \

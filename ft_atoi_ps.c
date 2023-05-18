@@ -29,7 +29,7 @@ const char	*ft_skip_spaces(const char *str)
 *str == '\f' || *str == '\r' || *str == ' ')
 		++str;
 	if (*str == '\0')
-		exit (1);
+		exit (0);
 	return (&(*str));
 }
 
@@ -45,7 +45,8 @@ int	ft_atoi(const char *str)
 	{
 		if (*str == 45)
 			sign = -1;
-		str++;
+		if (!ft_isdigit(*++str))
+			ft_error();
 	}
 	while (*str)
 	{

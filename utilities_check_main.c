@@ -19,7 +19,7 @@ void	ft_create_node(t_stack **head, char *str)
 	ft_lstadd_back(head, ft_lstnew(numb));
 }
 
-t_stack	*ft_arg_to_split(char **split)
+t_stack	*ft_args_splited(char **split)
 {
 	t_stack	*head_a;
 	int		i;
@@ -29,7 +29,7 @@ t_stack	*ft_arg_to_split(char **split)
 	{	
 		ft_freesplit(split);
 		free(split);
-		ft_error();
+		exit (0);
 	}
 	i = 0;
 	while (split[i])
@@ -50,7 +50,7 @@ t_stack	*ft_check_arg_and_create_stack_a(int ac, char **av)
 	if (ac == 2)
 	{
 		split = ft_split(av[1], 32);
-		head_a = ft_arg_to_split(split);
+		head_a = ft_args_splited(split);
 		ft_freesplit(split);
 		free(split);
 	}
