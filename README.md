@@ -1,11 +1,16 @@
 # Push Swap `100/100`
 
+## Theoretical Explanation
+<p align="center">
+  <a href="https://github.com/pin3dev/42_Push_Swap/wiki">---TUTORIAL---</a>
+</p>
+
+
 ## Table of Contents
 - [Project Overview](#overview)
 - [Mandatory Features](#features)
 - [Project Compilation and Execution](#compilation-and-execution)
 - [Tests -  Usage Examples](#usage-examples)
-- [Theoretical Explanation](#theoretical-explanation)
 - [Copyright](#contributors)
 
 ## Overview
@@ -75,14 +80,6 @@ $> $>./push_swap 3 5 2 - 4
 #$>
 
 ```
-
-## Theoretical Explanation
-<p align="center">
-  <a href="https://github.com/pin3dev/42_Push_Swap/wiki">****TUTORIAL****</a>
-</p>
-
-
-
 
 ## Contributors
 
