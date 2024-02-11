@@ -1,6 +1,5 @@
 # Push Swap `100/100`
 
-## Theoretical Explanation
 <p align="center">
   <a href="https://github.com/pin3dev/42_Push_Swap/wiki">---TUTORIAL---</a>
 </p>
