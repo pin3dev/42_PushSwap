@@ -1,7 +1,7 @@
 # Push Swap `100/100`
 
 <p align="center">
-  <img src="https://github.com/pin3dev/42_Push_Swap/blob/d3573e4aa7ad62d9e6d1ee2acf2e6da3dbe860b1/%3CTutorial%3EPushSwap/pushswap_vs.gif" width="600" height="375" />
+  <img src="https://github.com/pin3dev/42_Cursus/blob/a708c0de6d3fdc729bb720318b5d35bdaa9551c0/assets/PushSwap/Rdm/pushswap_vs.gif" width="600" height="375" />
 </p>
 
 <p align="center">
