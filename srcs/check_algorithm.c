@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_algorithm.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ivbatist <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pin3dev <pinedev@outlook.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:08:31 by ivbatist          #+#    #+#             */
-/*   Updated: 2023/05/17 19:36:03 by ivbatist         ###   ########.fr       */
+/*   Updated: 2024/08/08 15:04:38 by pin3dev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "push_swap.h"
+
+#include "../inc/push_swap.h"
 
 void	ft_find_place_n_def_total_mov(t_stack **src, t_stack **dest)
 {

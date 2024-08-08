@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_functions.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ivbatist <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pin3dev <pinedev@outlook.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 20:43:27 by ivbatist          #+#    #+#             */
-/*   Updated: 2023/05/17 20:43:28 by ivbatist         ###   ########.fr       */
+/*   Updated: 2024/08/08 15:05:37 by pin3dev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "push_swap.h"
+
+#include "../inc/push_swap.h"
 
 static int	count_words(char const *str, char c)
 {

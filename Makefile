@@ -3,20 +3,21 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ivbatist <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: pin3dev <pinedev@outlook.com>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/17 22:31:43 by ivbatist          #+#    #+#              #
-#    Updated: 2023/05/17 23:42:29 by ivbatist         ###   ########.fr        #
+#    Updated: 2024/08/08 15:08:38 by pin3dev          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME 	= push_swap
-HDRS 	= push_swap.h
-SRC 	= push_swap.c check_algorithm.c check_numbers.c ft_atoi_ps.c \
-	  ft_split_functions.c general_operations.c operations_a.c \
-	  operations_b.c operations_ab.c outward_algorithm.c \
-	  return_algorithm.c sort_algorithm.c utilities_check_main.c \
-	  utilities_list.c utilities_return.c
+NAME    = push_swap
+HDRS    = inc/push_swap.h
+SRC_DIR = srcs/
+SRC     = $(SRC_DIR)push_swap.c $(SRC_DIR)check_algorithm.c $(SRC_DIR)check_numbers.c \
+          $(SRC_DIR)ft_atoi_ps.c $(SRC_DIR)ft_split_functions.c $(SRC_DIR)general_operations.c \
+          $(SRC_DIR)operations_a.c $(SRC_DIR)operations_b.c $(SRC_DIR)operations_ab.c \
+          $(SRC_DIR)outward_algorithm.c $(SRC_DIR)return_algorithm.c $(SRC_DIR)sort_algorithm.c \
+          $(SRC_DIR)utilities_check_main.c $(SRC_DIR)utilities_list.c $(SRC_DIR)utilities_return.c
 OBJS = $(SRC:.c=.o)
 CC = cc
 CFLAGS = -Wall -Wextra -Werror

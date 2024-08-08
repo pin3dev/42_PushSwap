@@ -1,36 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operations_a.c                                     :+:      :+:    :+:   */
+/*   operations_ab.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ivbatist <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pin3dev <pinedev@outlook.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/17 22:47:49 by ivbatist          #+#    #+#             */
-/*   Updated: 2023/05/17 22:47:58 by ivbatist         ###   ########.fr       */
+/*   Created: 2023/05/17 22:48:21 by ivbatist          #+#    #+#             */
+/*   Updated: 2024/08/08 15:05:53 by pin3dev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "push_swap.h"
 
-void	sa(t_stack **a)
+#include "../inc/push_swap.h"
+
+void	ss(t_stack **a, t_stack **b)
 {
 	swap(&(*a));
-	write(1, "sa\n", 3);
+	swap(&(*b));
+	write(1, "ss\n", 3);
 }
 
-void	ra(t_stack **a)
+void	rr(t_stack **a, t_stack **b)
 {
 	rotate(&(*a));
-	write(1, "ra\n", 3);
+	rotate(&(*b));
+	write(1, "rr\n", 3);
 }
 
-void	rra(t_stack **a)
+void	rrr(t_stack **a, t_stack **b)
 {
 	reverse_rotate(&(*a));
-	write(1, "rra\n", 4);
-}
-
-void	pa(t_stack **a, t_stack **b)
-{
-	push(&(*a), &(*b));
-	write(1, "pa\n", 3);
+	reverse_rotate(&(*b));
+	write(1, "rrr\n", 4);
 }

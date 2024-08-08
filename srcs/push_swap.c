@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ivbatist <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pin3dev <pinedev@outlook.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 10:59:53 by ivbatist          #+#    #+#             */
-/*   Updated: 2023/05/17 20:24:30 by ivbatist         ###   ########.fr       */
+/*   Updated: 2024/08/08 15:06:04 by pin3dev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "push_swap.h"
+
+#include "../inc/push_swap.h"
 
 int	main(int ac, char **av)
 {

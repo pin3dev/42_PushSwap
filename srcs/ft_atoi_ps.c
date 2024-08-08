@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi_ps.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ivbatist <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pin3dev <pinedev@outlook.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 20:44:01 by ivbatist          #+#    #+#             */
-/*   Updated: 2023/05/17 21:42:51 by ivbatist         ###   ########.fr       */
+/*   Updated: 2024/08/08 15:05:28 by pin3dev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "push_swap.h"
+
+#include "../inc/push_swap.h"
 
 int	ft_isdigit(int c)
 {		

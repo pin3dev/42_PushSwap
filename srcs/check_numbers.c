@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_numbers.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ivbatist <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pin3dev <pinedev@outlook.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 19:17:39 by ivbatist          #+#    #+#             */
-/*   Updated: 2023/05/17 19:37:30 by ivbatist         ###   ########.fr       */
+/*   Updated: 2024/08/08 15:05:21 by pin3dev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "push_swap.h"
+
+#include "../inc/push_swap.h"
 
 t_stack	*ft_max(t_stack **stack)
 {

@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   return_algorithm.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ivbatist <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pin3dev <pinedev@outlook.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:17:18 by ivbatist          #+#    #+#             */
-/*   Updated: 2023/05/17 19:44:06 by ivbatist         ###   ########.fr       */
+/*   Updated: 2024/08/08 15:06:09 by pin3dev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "push_swap.h"
+
+#include "../inc/push_swap.h"
 
 void	ft_move_node_to_top_b(t_stack *node_b, t_stack**stack_b)
 {

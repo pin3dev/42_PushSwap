@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   sort_algorithm.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ivbatist <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pin3dev <pinedev@outlook.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:11:46 by ivbatist          #+#    #+#             */
-/*   Updated: 2023/05/17 19:56:56 by ivbatist         ###   ########.fr       */
+/*   Updated: 2024/08/08 15:06:14 by pin3dev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "push_swap.h"
+
+#include "../inc/push_swap.h"
 
 void	ft_sort_3(t_stack **stack_a)
 {
