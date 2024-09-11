@@ -38,7 +38,7 @@ ARG="3 5 2 1 4"; ./push_swap $ARG
 #[...list of operations...]
 
 #Execution option 2:
-$>./push_swap 3 5 2 1 4
+./push_swap 3 5 2 1 4
 #[...list of operations...]
 ```
 
@@ -69,7 +69,6 @@ ARG="3 5 2 1 4"; ./push_swap $ARG | ./checker $ARG
 
 ./push_swap 3 5 2 --2 4
 #Error
-#$>
 
 ./push_swap 3 5 2 -+2 4
 #Error
