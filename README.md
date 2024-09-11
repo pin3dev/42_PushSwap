@@ -31,10 +31,10 @@ This repository does not have a checker, so it is necessary for the sorting test
 
 ```bash
 #Compilation
-$>make
+make
 
 #Execution option 1:
-$>ARG="3 5 2 1 4"; ./push_swap $ARG
+ARG="3 5 2 1 4"; ./push_swap $ARG
 #[...list of operations...]
 
 #Execution option 2:
@@ -46,41 +46,36 @@ $>./push_swap 3 5 2 1 4
 
 ```bash
 #Test counting the amount of movements:
-$> ARG="3 5 2 1 4"; ./push_swap $ARG | wc -l
+ARG="3 5 2 1 4"; ./push_swap $ARG | wc -l
 #[...amount of operations...]
 
 #Test counting the amount of movements:
-$>./push_swap 3 5 2 1 4 | wc -l
+./push_swap 3 5 2 1 4 | wc -l
 #[...amount of operations...]
 
 #Test with sort checker:
-$> ARG="3 5 2 1 4"; ./push_swap $ARG | ./checker $ARG
+ARG="3 5 2 1 4"; ./push_swap $ARG | ./checker $ARG
 #OK
 
 #Test with non-integer:
-$> $>./push_swap 3 5 2 one 4
+./push_swap 3 5 2 one 4
+#Error
+
+./push_swap 3 5 2 -2147483649 4
+#Error
+
+./push_swap 3 5 2 2147483649 4
+#Error
+
+./push_swap 3 5 2 --2 4
 #Error
 #$>
 
-$> $>./push_swap 3 5 2 -2147483649 4
+./push_swap 3 5 2 -+2 4
 #Error
-#$>
 
-$> $>./push_swap 3 5 2 2147483649 4
+./push_swap 3 5 2 - 4
 #Error
-#$>
-
-$> $>./push_swap 3 5 2 --2 4
-#Error
-#$>
-
-$> $>./push_swap 3 5 2 -+2 4
-#Error
-#$>
-
-$> $>./push_swap 3 5 2 - 4
-#Error
-#$>
 
 ```
 
