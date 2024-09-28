@@ -116,7 +116,7 @@ This project strictly follows the [**42 School Norm**](https://github.com/pin3de
 All the theoretical materials used for the development of this project are available in the repository link provided below. These resources cover algorithm design, sorting techniques, and optimization strategies.
 
 <p align="center"> 
-  <a href="https://github.com/pin3dev/42_Cursus/tree/main/push_swap/#02-Push_Swap">
+  <a href="https://github.com/pin3dev/42_Cursus/tree/main/library/#02-Push_Swap">
     <img src="https://img.shields.io/badge/Push_Swap_Library-gray?style=for-the-badge"/>
   </a>
 </p>
@@ -126,7 +126,7 @@ All the theoretical materials used for the development of this project are avail
 A step-by-step tutorial is available and can be followed to complete the project. It is linked in the button below.   
 
 <p align="center"> 
-  <a href="https://github.com/pin3dev/42_Cursus/tree/main/tutorial/Born2BeRoot">
+  <a href="https://github.com/pin3dev/42_Cursus/tree/main/tutorial/PushSwap">
     <img src="https://img.shields.io/badge/PushSwap_Tutorial-lightgreen?style=for-the-badge"/>
   </a>
 </p>
