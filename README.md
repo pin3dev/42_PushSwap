@@ -5,10 +5,8 @@
 
 <p align="center"> 
   <a href="https://github.com/pin3dev/42_Cursus/tree/main/push_swap/#02-Push_Swap">
-    <img src="https://img.shields.io/badge/Sorting_Algorithm-blue?style=for-the-badge"/>
-    <img src="https://img.shields.io/badge/Makefile-blue?style=for-the-badge"/>
+    <img src="https://img.shields.io/badge/Sorting_Algorithms-blue?style=for-the-badge"/>
     <img src="https://img.shields.io/badge/Stacks-blue?style=for-the-badge"/>
-    <img src="https://img.shields.io/badge/Operations-blue?style=for-the-badge"/>
     <img src="https://img.shields.io/badge/Optimization-blue?style=for-the-badge"/>
   </a>
 </p>
