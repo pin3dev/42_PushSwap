@@ -12,68 +12,6 @@
 
 #include "../inc/push_swap.h"
 
-/* t_stack	*ft_lstnew(int content)
-{
-	t_stack	*new;
-
-	new = malloc(sizeof(t_stack));
-	if (new == NULL)
-		return (NULL);
-	if (new)
-	{
-		new->content = content;
-		new->next = NULL;
-	}
-	return (new);
-}
-
-void	ft_lstadd_back(t_stack **lst, t_stack *new)
-{
-	t_stack	*current;
-
-	if (!*lst)
-	{
-		*lst = new;
-		return ;
-	}
-	if (lst && *lst && new)
-	{
-		current = *lst;
-		while (current->next != 0)
-		{
-			current = current->next;
-		}
-		current->next = new;
-	}
-}
-
-t_stack	*ft_lstlast(t_stack *lst)
-{
-	if (lst)
-	{
-		while (lst->next != NULL)
-			lst = lst->next;
-	}
-	else
-		return (NULL);
-	return (lst);
-}
-
-int	ft_lstsize(t_stack *lst)
-{
-	int		count;
-	t_stack	*cur;
-
-	count = 0;
-	cur = lst;
-	while (cur != NULL)
-	{
-		cur = cur->next;
-		count++;
-	}
-	return (count);
-} */
-
 /**
  * @brief Creates a new stack node with the given content.
  *
@@ -108,7 +46,7 @@ t_stack *ft_stacknew(int content)
  * @brief Adds a new node to the end of the stack.
  *
  * This function adds the `new_node` to the end of the stack (`lst`). It uses the
- * `ft_lstadd_back()` function to add the node to the back of the stack.
+ * `ft_lstadd_back()` wrapped function to add the node to the back of the stack.
  *
  * @param lst A pointer to the head of the stack.
  * @param new_node The new node to be added to the end of the stack.
@@ -122,7 +60,7 @@ void ft_stackadd_back(t_stack **lst, t_stack *new_node)
 /**
  * @brief Returns the last node in the stack.
  *
- * This function returns a pointer to the last node in the stack. It uses `ft_lstlast()`
+ * This function returns a pointer to the last node in the stack. It uses `ft_lstlast()` wrapped
  * to find the last node in a generic linked list and casts it to the `t_stack` type.
  *
  * @param lst A pointer to the head of the stack.
@@ -140,7 +78,7 @@ t_stack *ft_stacklast(t_stack *lst)
  * @brief Returns the number of nodes in the stack.
  *
  * This function calculates and returns the size (number of nodes) in the stack by
- * calling `ft_lstsize()` on the linked list and casting it to the `t_stack` type.
+ * wrapping `ft_lstsize()` on the linked list and casting it to the `t_stack` type.
  *
  * @param lst A pointer to the head of the stack.
  *
