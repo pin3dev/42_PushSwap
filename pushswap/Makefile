@@ -39,7 +39,6 @@ SRC     = $(SRC_DIR)/push_swap.c $(SRC_DIR)/main.c \
           $(SRC_DIR)/utils_nodes.c $(SRC_DIR)/utils_stack.c $(SRC_DIR)/utils_checkers.c $(SRC_DIR)/utils.c
 		  
 OBJ = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC))
-#OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 ################################################################################
 # 							Libft Variables 								   #
