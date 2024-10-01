@@ -13,7 +13,7 @@
 #include "../inc/push_swap.h"
 
 /**
- * @brief Determines the optimal destination position for each node in the source stack and calculates the total movements required.
+ * @brief Determines the right destination position for each node in the source stack and calculates the total movements required.
  *
  * This function iterates through the source stack (`src`), finding the appropriate place in the destination stack (`dest`) for each node.
  * It compares the contents of the nodes to find the best insertion point in `dest` for each node in `src`. Once the optimal place
