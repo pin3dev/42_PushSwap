@@ -1,35 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   op_a.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pin3dev <pinedev@outlook.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/11 10:59:53 by ivbatist          #+#    #+#             */
-/*   Updated: 2024/08/08 15:06:04 by pin3dev          ###   ########.fr       */
+/*   Created: 2023/05/17 22:47:49 by ivbatist          #+#    #+#             */
+/*   Updated: 2024/10/01 00:14:51 by pin3dev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
-int	main(int ac, char **av)
+void	sa(t_stack **a)
 {
-	t_stack	*head_a;
+	swap(&(*a));
+	write(1, "sa\n", 3);
+}
 
-	if (ac < 2)
-		return (0);
-	else
-	{
-		head_a = ft_check_arg_and_create_stack_a(ac, av);
-		if (!head_a || ft_check_doubles(&head_a) == 1)
-		{
-			ft_freelst(&head_a);
-			ft_error();
-		}
-		if (!ft_check_sorted(&head_a))
-		{
-			ft_sort_cases(&head_a);
-		}
-		ft_freelst(&head_a);
-	}
+void	ra(t_stack **a)
+{
+	rotate(&(*a));
+	write(1, "ra\n", 3);
+}
+
+void	rra(t_stack **a)
+{
+	reverse_rotate(&(*a));
+	write(1, "rra\n", 4);
+}
+
+void	pa(t_stack **a, t_stack **b)
+{
+	push(&(*a), &(*b));
+	write(1, "pa\n", 3);
 }
