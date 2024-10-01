@@ -48,16 +48,16 @@ void	mv_node_to_top_b(t_stack *node_b, t_stack**stack_b)
 }
 
 /**
- * @brief Finds the optimal position to insert a node into the destination stack.
+ * @brief Finds the right position to insert a node into the destination stack.
  *
- * This function determines the best place to insert the `src` node into the `dest` stack,
+ * This function determines the right place to insert the `src` node into the `dest` stack,
  * so that the stack remains ordered. It searches for a node in the `dest` stack whose
  * content is greater than the `src` node's content but smaller than any other greater value found.
  *
  * @param src The node from the source stack that will be inserted into the destination stack.
  *            It contains the value (`content`) that needs to be placed in the correct position.
  * @param dest A pointer to the destination stack where the node will be inserted.
- *             The stack will be examined to find the optimal position for `src`.
+ *             The stack will be examined to find the right position for `src`.
  *
  * @return A pointer to the node in the destination stack that represents the ideal
  *         place to insert the `src` node.
