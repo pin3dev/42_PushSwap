@@ -21,12 +21,7 @@
  *
  * @param stack_a A pointer to stack A, which contains exactly three elements to be sorted.
  *
- * @note The function compares the nodes in the stack based on their content values:
- * - If the maximum value is at the third position and the minimum is in the second, a swap (`sa()`) is performed.
- * - If the maximum value is at the first position and the minimum is in the third, a swap (`sa()`) is followed by a reverse rotation (`rra()`).
- * - If the maximum value is at the first position and the minimum is in the second, a single rotation (`ra()`) is performed.
- * - If the maximum value is in the second position and the minimum is in the first, a swap (`sa()`) followed by a rotation (`ra()`) is performed.
- * - If the maximum value is in the second position and the minimum is in the third, a reverse rotation (`rra()`) is performed.
+ * @note The function compares the nodes in the stack based on their content values, @see https://t.ly/qhqhS
  *
  * @see ft_max() to determine the maximum value in stack A.
  * @see ft_min() to determine the minimum value in stack A.
@@ -72,7 +67,7 @@ void	sort_3(t_stack **stack_a)
  * @param stack_a A pointer to stack A, which initially contains the elements to be sorted.
  * @param stack_b A pointer to stack B, which serves as a temporary holding stack during the sorting process.
  *
- * @note The function performs the following steps:
+ * @note The function performs the Turk Algorithm, @see https://t.ly/qhqhS
  * - Moves two elements from stack A to stack B using the `pb()` function.
  * - Calculates and assigns the index, movement, and orientation for each node in both stacks using `put_index_n_def_mov_n_orient()`.
  * - Repeatedly finds the best candidate (`node_src`) from stack A and the best destination (`node_dest`) in stack B.
