@@ -100,6 +100,9 @@ t_stack	*args_to_node(int ac, char **av)
 	int		i;
 
 	head_a = NULL;
+	if (ac == 2 && av[1][0] == '\0') //added this condition after testing with pasqualerossi
+		ft_error();
+	
 	if (ac == 2)
 	{
 		split = ft_split(av[1], 32);
