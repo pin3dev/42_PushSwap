@@ -53,7 +53,7 @@ For detailed documentation, including usage examples and function breakdowns, pl
 
 <p align="center"> 
   <a href="https://github.com/pin3dev/42_Push_Swap/wiki">
-    <img src="https://img.shields.io/badge/Push_Swap_Docs-lightgreen?style=for-the-badge"/>
+    <img src="https://img.shields.io/badge/PushSwap_Docs-lightgreen?style=for-the-badge"/>
   </a>
 </p>
 
@@ -116,7 +116,7 @@ All the theoretical materials used for the development of this project are avail
 
 <p align="center"> 
   <a href="https://github.com/pin3dev/42_Cursus/tree/main/library/#02-Push_Swap">
-    <img src="https://img.shields.io/badge/Push_Swap_Library-gray?style=for-the-badge"/>
+    <img src="https://img.shields.io/badge/PushSwap_Library-gray?style=for-the-badge"/>
   </a>
 </p>
 
