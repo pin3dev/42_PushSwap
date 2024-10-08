@@ -1,4 +1,4 @@
-<h1 align="center">Push Swap</h1>
+<h1 align="center">PushSwap</h1>
 <p align="center"> 
   <img src="https://img.shields.io/badge/grade-100%2F100-green?style=for-the-badge&logo=42&labelColor=gray"/>
 </p>
