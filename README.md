@@ -96,9 +96,13 @@ To run the **Push Swap** algorithm on a list of integers:
 2. The program will output a sequence of operations needed to sort the integers:
     ```bash
     pb
-    ra
+    pb
     sa
     pa
+    rra
+    pa
+    rra
+    rra
     ```
 
 You can also test the number of operations by piping the output to `wc -l`:
