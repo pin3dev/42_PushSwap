@@ -63,7 +63,7 @@ To clone this repository and compile the project, run the following commands:
 
 ```bash
 git clone https://github.com/pin3dev/42_Push_Swap.git
-cd 42_Push_Swap
+cd 42_Push_Swap/pushswap
 ```
 This will download the project from GitHub into your local machine. Once inside the `42_Push_Swap` directory, you can compile the project using the provided Makefile.
 
