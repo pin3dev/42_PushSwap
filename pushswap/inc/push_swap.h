@@ -28,7 +28,7 @@ typedef struct stack
 	int				index;
 }			t_stack;
 //////////////////////////////////////////////////MAIN
-int	pushswap(int ac, char **av);
+int		pushswap(int ac, char **av);
 //////////////////////////////////////////////////OPERATIONS
 void		swap(t_stack **stack);
 void		rotate(t_stack **stack);
@@ -40,6 +40,7 @@ void		big_sort(t_stack **stack_a, t_stack **stack_b);
 void		sort_cases(t_stack **stack_a);
 void		mv_node_to_top_a(t_stack *node_a, t_stack**stack_a);
 void		mv_node_to_top_ab(t_stack *node_a, t_stack *node_b, \
+t_stack**stack_a, t_stack**stack_b)
 void		mv_node_to_top_b(t_stack *node_b, t_stack**stack_b);
 void		rotate_to_finish(t_stack **stack_a, t_stack **stack_b);
 void		back_to_a(t_stack **stack_a, t_stack **stack_b);
