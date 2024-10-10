@@ -116,7 +116,7 @@ This project strictly follows the [**42 School Norm**](https://github.com/pin3de
 
 ## 📖 Theoretical Background <a id="theoretical"></a>
 
-All the theoretical materials used for the development of this project are available in the repository link provided below. These resources cover algorithm design, sorting techniques, and optimization strategies.
+All the theoretical material used to develop this project is organized and can be accessed directly via the link below:  
 
 <p align="center"> 
   <a href="https://github.com/pin3dev/42_Cursus/tree/main/library/#02-Push_Swap">
