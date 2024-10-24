@@ -6,11 +6,11 @@
 /*   By: pin3dev <pinedev@outlook.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:17:18 by ivbatist          #+#    #+#             */
-/*   Updated: 2024/10/01 00:48:01 by pin3dev          ###   ########.fr       */
+/*   Updated: 2024/10/25 00:56:19 by pin3dev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/push_swap.h"
+#include "push_swap.h"
 
 /**
  * @brief Moves a node to the top of stack B.

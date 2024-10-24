@@ -6,11 +6,11 @@
 /*   By: pin3dev <pinedev@outlook.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 00:24:23 by pin3dev           #+#    #+#             */
-/*   Updated: 2024/10/01 00:57:45 by pin3dev          ###   ########.fr       */
+/*   Updated: 2024/10/25 00:56:19 by pin3dev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/push_swap.h"
+#include "push_swap.h"
 
 /**
  * @brief Checks for duplicate values in the stack.

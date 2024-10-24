@@ -6,11 +6,11 @@
 /*   By: pin3dev <pinedev@outlook.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:11:46 by ivbatist          #+#    #+#             */
-/*   Updated: 2024/10/01 00:52:42 by pin3dev          ###   ########.fr       */
+/*   Updated: 2024/10/25 00:56:19 by pin3dev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/push_swap.h"
+#include "push_swap.h"
 
 /**
  * @brief Sorts a stack of three elements in ascending order.

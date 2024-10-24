@@ -6,11 +6,11 @@
 /*   By: pin3dev <pinedev@outlook.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 10:59:53 by ivbatist          #+#    #+#             */
-/*   Updated: 2024/10/01 00:57:16 by pin3dev          ###   ########.fr       */
+/*   Updated: 2024/10/25 00:56:19 by pin3dev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/push_swap.h"
+#include "push_swap.h"
 
 /**
  * @brief Entry point for the push_swap program, handling input validation, sorting, and cleanup.

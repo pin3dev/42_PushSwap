@@ -6,7 +6,7 @@
 /*   By: pin3dev <pinedev@outlook.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 22:47:30 by ivbatist          #+#    #+#             */
-/*   Updated: 2024/10/01 00:36:48 by pin3dev          ###   ########.fr       */
+/*   Updated: 2024/10/25 00:50:45 by pin3dev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include<stdlib.h>
 # include<unistd.h>
-# include "../../../42_Libft/libft/inc/libft.h"
+# include "libft.h"
 
 //////////////////////////////////////////////////ESTRUTURA
 typedef struct stack

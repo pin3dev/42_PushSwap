@@ -6,11 +6,11 @@
 /*   By: pin3dev <pinedev@outlook.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 00:16:24 by pin3dev           #+#    #+#             */
-/*   Updated: 2024/10/01 00:17:10 by pin3dev          ###   ########.fr       */
+/*   Updated: 2024/10/25 00:56:19 by pin3dev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/push_swap.h"
+#include "push_swap.h"
 
 int main(int ac, char **av)
 {
